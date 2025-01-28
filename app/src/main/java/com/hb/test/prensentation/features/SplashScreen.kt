@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.hb.test.R
-import com.hb.test.navigation.Screens
+import com.hb.test.prensentation.navigation.Screens
 import com.hb.test.utils.LottieLoader
 
 @Composable

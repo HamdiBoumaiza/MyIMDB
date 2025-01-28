@@ -12,8 +12,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.hb.test.navigation.NavGraph
-import com.hb.test.ui.theme.MyTestAppTheme
+import com.hb.test.prensentation.navigation.NavGraph
+import com.hb.test.prensentation.theme.MyTestAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

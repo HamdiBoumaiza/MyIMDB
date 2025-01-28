@@ -10,10 +10,10 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.navigation.compose.rememberNavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.hb.test.domain.model.Movie
-import com.hb.test.features.MainActivity
-import com.hb.test.features.details.DetailsScreenUIState
-import com.hb.test.features.details.DetailsViewModel
-import com.hb.test.features.details.MovieDetails
+import com.hb.test.prensentation.features.MainActivity
+import com.hb.test.prensentation.features.details.DetailsScreenUIState
+import com.hb.test.prensentation.features.details.DetailsViewModel
+import com.hb.test.prensentation.features.details.MovieDetails
 import com.hb.test.utils.DETAILS_SCREEN_TITLE
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

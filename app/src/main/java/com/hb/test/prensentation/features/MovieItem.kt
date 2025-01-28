@@ -19,10 +19,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import com.hb.test.domain.model.Movie
-import com.hb.test.ui.theme.dp_10
-import com.hb.test.ui.theme.dp_24
-import com.hb.test.ui.theme.dp_4
-import com.hb.test.ui.theme.dp_60
+import com.hb.test.prensentation.theme.dp_10
+import com.hb.test.prensentation.theme.dp_24
+import com.hb.test.prensentation.theme.dp_4
+import com.hb.test.prensentation.theme.dp_60
 
 @Composable
 fun MovieItem(movie: Movie, onMovieClicked: () -> Unit) {

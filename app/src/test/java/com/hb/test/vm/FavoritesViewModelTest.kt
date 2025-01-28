@@ -3,7 +3,7 @@ package com.hb.test.vm
 import app.cash.turbine.test
 import com.hb.test.domain.model.Movie
 import com.hb.test.domain.usecases.GetFavoriteMoviesUseCase
-import com.hb.test.features.favorites.FavoritesViewModel
+import com.hb.test.prensentation.features.favorites.FavoritesViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.clearAllMocks
 import io.mockk.coEvery

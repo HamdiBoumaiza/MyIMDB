@@ -9,10 +9,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.hb.test.features.SplashScreen
-import com.hb.test.features.details.DetailsScreen
-import com.hb.test.features.favorites.FavoritesScreen
-import com.hb.test.features.home.HomeScreen
+import com.hb.test.prensentation.features.SplashScreen
+import com.hb.test.prensentation.features.details.DetailsScreen
+import com.hb.test.prensentation.features.favorites.FavoritesScreen
+import com.hb.test.prensentation.features.home.HomeScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {

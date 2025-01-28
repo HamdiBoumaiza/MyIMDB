@@ -27,15 +27,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.hb.test.R
-import com.hb.test.features.MovieItem
-import com.hb.test.navigation.Screens
-import com.hb.test.ui.theme.dp_10
-import com.hb.test.ui.theme.dp_12
-import com.hb.test.ui.theme.dp_30
-import com.hb.test.ui.theme.dp_4
-import com.hb.test.ui.theme.dp_8
-import com.hb.test.ui.theme.sp_14
-import com.hb.test.ui.theme.sp_20
+import com.hb.test.prensentation.features.MovieItem
+import com.hb.test.prensentation.navigation.Screens
+import com.hb.test.prensentation.theme.dp_10
+import com.hb.test.prensentation.theme.dp_12
+import com.hb.test.prensentation.theme.dp_30
+import com.hb.test.prensentation.theme.dp_4
+import com.hb.test.prensentation.theme.dp_8
+import com.hb.test.prensentation.theme.sp_14
+import com.hb.test.prensentation.theme.sp_20
 
 @Composable
 fun FavoritesScreen(

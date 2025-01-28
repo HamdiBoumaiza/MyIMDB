@@ -48,9 +48,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.hb.test.R
 import com.hb.test.domain.model.Movie
-import com.hb.test.navigation.Screens
-import com.hb.test.ui.theme.dp_2
-import com.hb.test.ui.theme.dp_20
+import com.hb.test.prensentation.navigation.Screens
+import com.hb.test.prensentation.theme.dp_2
+import com.hb.test.prensentation.theme.dp_20
 import com.hb.test.utils.HOME_SCREEN
 import com.hb.test.utils.LoopReverseLottieLoader
 import com.hb.test.utils.mapError
