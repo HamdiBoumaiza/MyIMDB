@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MyTestApp</string>
+    <string name="trending">Trending Now</string>
+    <string name="popular">Popular Now</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="upcoming">Upcoming movies</string>
+    <string name="similar">Similar Movies</string>
+    <string name="cast">Cast</string>
+    <string name="fav_deleted">Fav Deleted</string>
+    <string name="fav_added">Fav added</string>
+    <string name="search_by_movie_title">Search by movie title</string>
+    <string name="failed_tap_to_retry">Failed! Tap to retry!</string>
+    <string name="connection_failed_tap_to_retry">Connection failed. Tap to retry!</string>
+    <string name="sorry_something_went_wrong_tap_to_retry">Sorry, Something went wrong!\nTap to retry</string>
+    <string name="favorite_movies">Favorite Movies</string>
+    <string name="no_favorite_movies_added_yet">No Favorite Movies added yet</string>
+    <string name="network_error_please_try_again_later">Network error, please try again later</string>
+    <string name="error_server_please_try_again">Error Server! Please try again</string>
+    <string name="oops_something_went_wrong_please_try_again">Oops , something went wrong , please try again!</string>
+    <string name="no_network_exception">NoNetworkException  ::: please check your internet connexion</string>
+</resources>
