@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features.details
+package com.hb.test.presentation.features.details
 
 import com.hb.test.domain.model.Cast
 

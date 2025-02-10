@@ -7,13 +7,12 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.navigation.compose.rememberNavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.hb.test.domain.model.Movie
-import com.hb.test.prensentation.features.MainActivity
-import com.hb.test.prensentation.features.details.DetailsScreenUIState
-import com.hb.test.prensentation.features.details.DetailsViewModel
-import com.hb.test.prensentation.features.details.MovieDetails
+import com.hb.test.presentation.features.MainActivity
+import com.hb.test.presentation.features.details.DetailsScreenUIState
+import com.hb.test.presentation.features.details.DetailsViewModel
+import com.hb.test.presentation.features.details.MovieDetails
 import com.hb.test.utils.DETAILS_SCREEN_TITLE
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -37,7 +36,7 @@ class MovieDetailsTest {
         hiltTestRule.inject()
         composeTestRule.activity.setContent {
             MovieDetails(
-                rememberNavController(),
+                onNavigateBack = {},
                 DetailsScreenUIState.Success(Movie().copy(title = TITLE_TEST)),
                 composeTestRule.activity.viewModels<DetailsViewModel>().value
             )

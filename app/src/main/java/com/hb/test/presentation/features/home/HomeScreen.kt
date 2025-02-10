@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features.home
+package com.hb.test.presentation.features.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -41,16 +41,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.hb.test.R
 import com.hb.test.domain.model.Movie
-import com.hb.test.prensentation.navigation.Screens
-import com.hb.test.prensentation.theme.dp_2
-import com.hb.test.prensentation.theme.dp_20
+import com.hb.test.presentation.theme.dp_2
+import com.hb.test.presentation.theme.dp_20
 import com.hb.test.utils.HOME_SCREEN
 import com.hb.test.utils.LoopReverseLottieLoader
 import com.hb.test.utils.mapError
@@ -60,7 +58,8 @@ import java.io.IOException
 
 @Composable
 fun HomeScreen(
-    navController: NavController,
+    onNavigateToDetailsScreen: (id: Int) -> Unit,
+    onNavigateToFavoritesScreen: () -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     Surface(
@@ -97,15 +96,13 @@ fun HomeScreen(
                             AutoComplete(
                                 movieList = movies.itemSnapshotList.toList().filterNotNull(),
                                 onSelectMovies = { movie -> homeViewModel.searchMovies(movie) },
-                                onMovieClicked = { id ->
-                                    navController.navigate(Screens.DetailsScreen.withMovie(id))
-                                }
+                                onMovieClicked = { id -> onNavigateToDetailsScreen(id) }
                             )
                         }
                         Icon(
                             modifier = Modifier
                                 .padding(top = 25.dp)
-                                .clickable { navController.navigate(Screens.FavoritesScreen.route) },
+                                .clickable { onNavigateToFavoritesScreen() },
                             imageVector = Icons.Default.Favorite,
                             contentDescription = "Favorites Icon",
                         )
@@ -113,7 +110,7 @@ fun HomeScreen(
                 }
                 item {
                     MovieSection(
-                        navController = navController,
+                        onNavigateToDetailsScreen = onNavigateToDetailsScreen,
                         homeMovieType = HomeMovieType.TRENDING,
                         pagingItems = homeViewModel.trendingMoviesState.collectAsLazyPagingItems(),
                         onViewAllClick = {},
@@ -122,7 +119,7 @@ fun HomeScreen(
                 }
                 item {
                     MovieSection(
-                        navController = navController,
+                        onNavigateToDetailsScreen = onNavigateToDetailsScreen,
                         homeMovieType = HomeMovieType.POPULAR,
                         pagingItems = homeViewModel.popularMoviesState.collectAsLazyPagingItems(),
                         onViewAllClick = {},
@@ -131,7 +128,7 @@ fun HomeScreen(
                 }
                 item {
                     MovieSection(
-                        navController = navController,
+                        onNavigateToDetailsScreen = onNavigateToDetailsScreen,
                         homeMovieType = HomeMovieType.TOP_RATED,
                         pagingItems = homeViewModel.topRatedMoviesState.value.collectAsLazyPagingItems(),
                         onViewAllClick = {},
@@ -140,7 +137,7 @@ fun HomeScreen(
                 }
                 item {
                     MovieSection(
-                        navController = navController,
+                        onNavigateToDetailsScreen = onNavigateToDetailsScreen,
                         homeMovieType = HomeMovieType.UPCOMING,
                         pagingItems = homeViewModel.upcomingMoviesState.value.collectAsLazyPagingItems(),
                         onViewAllClick = {},
@@ -154,7 +151,7 @@ fun HomeScreen(
 
 @Composable
 fun MovieSection(
-    navController: NavController,
+    onNavigateToDetailsScreen: (id: Int) -> Unit,
     homeMovieType: HomeMovieType,
     pagingItems: LazyPagingItems<Movie>,
     onViewAllClick: () -> Unit,
@@ -177,7 +174,7 @@ fun MovieSection(
             modifier = Modifier.clickable { onViewAllClick() }
         )
     }
-    ScrollableMovieItems(navController, pagingItems) { onErrorClick() }
+    ScrollableMovieItems(onNavigateToDetailsScreen, pagingItems) { onErrorClick() }
 }
 
 private fun HomeMovieType.getTitle() = when (this.name) {
@@ -189,7 +186,7 @@ private fun HomeMovieType.getTitle() = when (this.name) {
 
 @Composable
 private fun ScrollableMovieItems(
-    navigator: NavController,
+    onNavigateToDetailsScreen: (id: Int) -> Unit,
     pagingItems: LazyPagingItems<Movie>,
     onErrorClick: () -> Unit
 ) {
@@ -210,11 +207,7 @@ private fun ScrollableMovieItems(
                             imageUrl = pagingItems[index]?.imageUrl ?: "",
                             title = pagingItems[index]?.title ?: ""
                         ) {
-                            pagingItems[index]?.let {
-                                navigator.navigate(
-                                    Screens.DetailsScreen.withMovie(it.id)
-                                )
-                            }
+                            pagingItems[index]?.let { onNavigateToDetailsScreen(it.id) }
                         }
                     }
                 }

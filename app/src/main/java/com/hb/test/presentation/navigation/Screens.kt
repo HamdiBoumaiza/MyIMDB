@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.navigation
+package com.hb.test.presentation.navigation
 
 const val MOVIE_ID_ARG_KEY = "movie"
 

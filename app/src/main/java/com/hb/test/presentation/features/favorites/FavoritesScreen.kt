@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features.favorites
+package com.hb.test.presentation.features.favorites
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -25,21 +25,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import com.hb.test.R
-import com.hb.test.prensentation.features.MovieItem
-import com.hb.test.prensentation.navigation.Screens
-import com.hb.test.prensentation.theme.dp_10
-import com.hb.test.prensentation.theme.dp_12
-import com.hb.test.prensentation.theme.dp_30
-import com.hb.test.prensentation.theme.dp_4
-import com.hb.test.prensentation.theme.dp_8
-import com.hb.test.prensentation.theme.sp_14
-import com.hb.test.prensentation.theme.sp_20
+import com.hb.test.presentation.features.MovieItem
+import com.hb.test.presentation.theme.dp_10
+import com.hb.test.presentation.theme.dp_12
+import com.hb.test.presentation.theme.dp_30
+import com.hb.test.presentation.theme.dp_4
+import com.hb.test.presentation.theme.dp_8
+import com.hb.test.presentation.theme.sp_14
+import com.hb.test.presentation.theme.sp_20
 
 @Composable
 fun FavoritesScreen(
-    navController: NavController,
+    onNavigateBack: () -> Unit,
+    onNavigateToDetailsScreen: (id: Int) -> Unit,
     favoritesViewModel: FavoritesViewModel = hiltViewModel()
 ) {
     val favoriteMoviesState by favoritesViewModel.favoriteMoviesState.collectAsStateWithLifecycle()
@@ -60,7 +59,7 @@ fun FavoritesScreen(
                 modifier = Modifier
                     .height(dp_30)
                     .width(dp_30)
-                    .clickable { navController.popBackStack() },
+                    .clickable { onNavigateBack() },
                 painter = painterResource(id = R.drawable.baseline_arrow_back_24),
                 contentDescription = null
             )
@@ -88,9 +87,7 @@ fun FavoritesScreen(
                     verticalArrangement = Arrangement.spacedBy(dp_4),
                 ) {
                     items(favoriteMoviesState) { movie ->
-                        MovieItem(movie) {
-                            navController.navigate(Screens.DetailsScreen.withMovie(movie.id))
-                        }
+                        MovieItem(movie) { onNavigateToDetailsScreen(movie.id) }
                     }
                 }
             }

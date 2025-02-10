@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features.home
+package com.hb.test.presentation.features.home
 
 enum class HomeMovieType {
     TRENDING,

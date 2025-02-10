@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features.details
+package com.hb.test.presentation.features.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

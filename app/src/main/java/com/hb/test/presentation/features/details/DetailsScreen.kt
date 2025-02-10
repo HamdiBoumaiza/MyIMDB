@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features.details
+package com.hb.test.presentation.features.details
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -42,7 +42,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -51,22 +50,21 @@ import com.hb.test.R
 import com.hb.test.domain.model.Cast
 import com.hb.test.domain.model.Genre
 import com.hb.test.domain.model.Movie
-import com.hb.test.prensentation.features.home.trimTitle
-import com.hb.test.prensentation.navigation.Screens
-import com.hb.test.prensentation.theme.dp_10
-import com.hb.test.prensentation.theme.dp_100
-import com.hb.test.prensentation.theme.dp_12
-import com.hb.test.prensentation.theme.dp_150
-import com.hb.test.prensentation.theme.dp_2
-import com.hb.test.prensentation.theme.dp_30
-import com.hb.test.prensentation.theme.dp_300
-import com.hb.test.prensentation.theme.dp_4
-import com.hb.test.prensentation.theme.dp_5
-import com.hb.test.prensentation.theme.dp_8
-import com.hb.test.prensentation.theme.sp_12
-import com.hb.test.prensentation.theme.sp_16
-import com.hb.test.prensentation.theme.sp_18
-import com.hb.test.prensentation.theme.sp_20
+import com.hb.test.presentation.features.home.trimTitle
+import com.hb.test.presentation.theme.dp_10
+import com.hb.test.presentation.theme.dp_100
+import com.hb.test.presentation.theme.dp_12
+import com.hb.test.presentation.theme.dp_150
+import com.hb.test.presentation.theme.dp_2
+import com.hb.test.presentation.theme.dp_30
+import com.hb.test.presentation.theme.dp_300
+import com.hb.test.presentation.theme.dp_4
+import com.hb.test.presentation.theme.dp_5
+import com.hb.test.presentation.theme.dp_8
+import com.hb.test.presentation.theme.sp_12
+import com.hb.test.presentation.theme.sp_16
+import com.hb.test.presentation.theme.sp_18
+import com.hb.test.presentation.theme.sp_20
 import com.hb.test.utils.DETAILS_SCREEN_TITLE
 import com.hb.test.utils.DarkAndLightPreviews
 import com.hb.test.utils.LoopReverseLottieLoader
@@ -75,7 +73,8 @@ import com.hb.test.utils.showToast
 
 @Composable
 fun DetailsScreen(
-    navController: NavController,
+    onNavigateBack: () -> Unit,
+    onNavigateToDetailsScreen: (id: Int) -> Unit,
     movieId: Int,
     detailsViewModel: DetailsViewModel = hiltViewModel()
 ) {
@@ -96,9 +95,9 @@ fun DetailsScreen(
                 .padding(dp_8),
             verticalArrangement = Arrangement.spacedBy(dp_12)
         ) {
-            MovieDetails(navController, movieState, detailsViewModel)
+            MovieDetails(onNavigateBack, movieState, detailsViewModel)
             MovieCast(castState)
-            RecommendedMovie(similarMovies, navController)
+            RecommendedMovie(similarMovies, onNavigateToDetailsScreen)
         }
     }
 }
@@ -117,7 +116,7 @@ private fun MovieCast(castState: DetailsScreenCastUIState) {
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun MovieDetails(
-    navController: NavController,
+    onNavigateBack: () -> Unit,
     state: DetailsScreenUIState,
     detailsViewModel: DetailsViewModel,
 ) {
@@ -138,7 +137,7 @@ fun MovieDetails(
                         .height(dp_30)
                         .width(dp_30)
                         .weight(0.1f)
-                        .clickable { navController.popBackStack() },
+                        .clickable { onNavigateBack() },
                     painter = painterResource(id = R.drawable.baseline_arrow_back_24),
                     contentDescription = null
                 )
@@ -279,7 +278,7 @@ fun ErrorText(text: String) {
 }
 
 @Composable
-fun RecommendedMovie(pagingItems: LazyPagingItems<Movie>, navigator: NavController) {
+fun RecommendedMovie(pagingItems: LazyPagingItems<Movie>, onNavigateToDetailsScreen: (id: Int) -> Unit) {
     Column(modifier = Modifier.padding(bottom = dp_10)) {
         when (pagingItems.loadState.refresh) {
             is LoadState.Loading -> {
@@ -302,9 +301,7 @@ fun RecommendedMovie(pagingItems: LazyPagingItems<Movie>, navigator: NavControll
                                         .height(dp_150)
                                         .clickable {
                                             recommended?.id?.let {
-                                                navigator.navigate(
-                                                    Screens.DetailsScreen.withMovie(it)
-                                                )
+                                                onNavigateToDetailsScreen(it)
                                             }
                                         },
                                     contentScale = ContentScale.Crop,

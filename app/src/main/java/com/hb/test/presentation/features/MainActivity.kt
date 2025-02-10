@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features
+package com.hb.test.presentation.features
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,8 +12,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.hb.test.prensentation.navigation.NavGraph
-import com.hb.test.prensentation.theme.MyTestAppTheme
+import com.hb.test.presentation.navigation.NavGraph
+import com.hb.test.presentation.theme.MyTestAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,4 +1,21 @@
 [*.{kt,kts}]
+
+# Indentation size
+indent_size = 4
+indent_style = space
+
+# Maximum line length
+max_line_length = 100
+
+# Trim trailing whitespace
+trim_trailing_whitespace = true
+
+# Insert a newline at the end of the file
+insert_final_newline = true
+
+# Trailing comma in multiline collections and arguments
+ij_kotlin_allow_trailing_comma = true
+
 ij_kotlin_imports_layout = *
 ktlint_code_style = intellij_idea
 ktlint_standard_discouraged-comment-location = disabled

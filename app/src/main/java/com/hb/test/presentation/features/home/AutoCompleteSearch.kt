@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features.home
+package com.hb.test.presentation.features.home
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -46,15 +46,15 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import com.hb.test.R
 import com.hb.test.domain.model.Movie
-import com.hb.test.prensentation.features.MovieItem
-import com.hb.test.prensentation.theme.dp_10
-import com.hb.test.prensentation.theme.dp_12
-import com.hb.test.prensentation.theme.dp_15
-import com.hb.test.prensentation.theme.dp_2
-import com.hb.test.prensentation.theme.dp_200
-import com.hb.test.prensentation.theme.dp_4
-import com.hb.test.prensentation.theme.dp_55
-import com.hb.test.prensentation.theme.sp_16
+import com.hb.test.presentation.features.MovieItem
+import com.hb.test.presentation.theme.dp_10
+import com.hb.test.presentation.theme.dp_12
+import com.hb.test.presentation.theme.dp_15
+import com.hb.test.presentation.theme.dp_2
+import com.hb.test.presentation.theme.dp_200
+import com.hb.test.presentation.theme.dp_4
+import com.hb.test.presentation.theme.dp_55
+import com.hb.test.presentation.theme.sp_16
 import com.hb.test.utils.HOME_SCREEN_SEARCH
 import com.hb.test.utils.HOME_SCREEN_SEARCH_RESULT
 import kotlinx.coroutines.CoroutineScope

@@ -10,7 +10,7 @@ import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextInput
 import com.hb.test.domain.model.Movie
-import com.hb.test.prensentation.features.home.AutoComplete
+import com.hb.test.presentation.features.home.AutoComplete
 import com.hb.test.utils.HOME_SCREEN_SEARCH
 import com.hb.test.utils.HOME_SCREEN_SEARCH_RESULT
 import io.cucumber.java.en.And

@@ -6,7 +6,7 @@ import app.cash.turbine.test
 import com.hb.test.data.repo.RemoteFilmRepositoryImpl
 import com.hb.test.domain.model.Movie
 import com.hb.test.domain.usecases.SearchMoviesUseCase
-import com.hb.test.prensentation.features.home.HomeViewModel
+import com.hb.test.presentation.features.home.HomeViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.clearAllMocks
 import io.mockk.coEvery

@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features.home
+package com.hb.test.presentation.features.home
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

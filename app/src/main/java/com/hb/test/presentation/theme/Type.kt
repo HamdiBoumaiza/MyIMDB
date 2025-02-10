@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.theme
+package com.hb.test.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.graphics.Color

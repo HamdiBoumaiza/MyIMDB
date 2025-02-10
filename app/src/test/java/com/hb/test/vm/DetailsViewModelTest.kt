@@ -13,9 +13,9 @@ import com.hb.test.domain.usecases.GetMovieCastUseCase
 import com.hb.test.domain.usecases.GetMovieDetailsUseCase
 import com.hb.test.domain.usecases.GetSimilarMoviesUseCase
 import com.hb.test.domain.usecases.InsertFavoriteMovieUseCase
-import com.hb.test.prensentation.features.details.DetailsScreenCastUIState
-import com.hb.test.prensentation.features.details.DetailsScreenUIState
-import com.hb.test.prensentation.features.details.DetailsViewModel
+import com.hb.test.presentation.features.details.DetailsScreenCastUIState
+import com.hb.test.presentation.features.details.DetailsScreenUIState
+import com.hb.test.presentation.features.details.DetailsViewModel
 import com.hb.test.utils.network.NoNetworkException
 import io.mockk.MockKAnnotations
 import io.mockk.clearAllMocks

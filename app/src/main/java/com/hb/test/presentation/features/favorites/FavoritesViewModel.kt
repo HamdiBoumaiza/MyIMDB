@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features.favorites
+package com.hb.test.presentation.features.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

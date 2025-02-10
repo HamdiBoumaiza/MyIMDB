@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features
+package com.hb.test.presentation.features
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,13 +8,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import com.hb.test.R
-import com.hb.test.prensentation.navigation.Screens
 import com.hb.test.utils.LottieLoader
 
 @Composable
-fun SplashScreen(navController: NavController) {
+fun SplashScreen(onNavigateToHomeScreen: () -> Unit) {
 
     Surface(
         color = MaterialTheme.colorScheme.background,
@@ -26,7 +24,7 @@ fun SplashScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LottieLoader(lottieFile = R.raw.intro_animation) { isProgressFinished ->
-                if (isProgressFinished) navController.navigate(Screens.HomeScreen.route) { popUpTo(0) }
+                if (isProgressFinished) onNavigateToHomeScreen()
             }
         }
     }

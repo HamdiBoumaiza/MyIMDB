@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.features
+package com.hb.test.presentation.features
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,10 +19,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import com.hb.test.domain.model.Movie
-import com.hb.test.prensentation.theme.dp_10
-import com.hb.test.prensentation.theme.dp_24
-import com.hb.test.prensentation.theme.dp_4
-import com.hb.test.prensentation.theme.dp_60
+import com.hb.test.presentation.theme.dp_10
+import com.hb.test.presentation.theme.dp_24
+import com.hb.test.presentation.theme.dp_4
+import com.hb.test.presentation.theme.dp_60
 
 @Composable
 fun MovieItem(movie: Movie, onMovieClicked: () -> Unit) {

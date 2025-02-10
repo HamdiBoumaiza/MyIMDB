@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.navigation
+package com.hb.test.presentation.navigation
 
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.LinearEasing

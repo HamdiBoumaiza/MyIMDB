@@ -1,4 +1,4 @@
-package com.hb.test.prensentation.navigation
+package com.hb.test.presentation.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
@@ -9,10 +9,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.hb.test.prensentation.features.SplashScreen
-import com.hb.test.prensentation.features.details.DetailsScreen
-import com.hb.test.prensentation.features.favorites.FavoritesScreen
-import com.hb.test.prensentation.features.home.HomeScreen
+import com.hb.test.presentation.features.SplashScreen
+import com.hb.test.presentation.features.details.DetailsScreen
+import com.hb.test.presentation.features.favorites.FavoritesScreen
+import com.hb.test.presentation.features.home.HomeScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
@@ -29,7 +29,13 @@ fun NavGraph(navController: NavHostController) {
             exitTransition = { exitTransition() },
             popEnterTransition = { popEnterTransition() },
         ) {
-            SplashScreen(navController = navController)
+            SplashScreen(
+                onNavigateToHomeScreen = {
+                    navController.navigate(Screens.HomeScreen.route) {
+                        popUpTo(0)
+                    }
+                }
+            )
         }
 
         composable(
@@ -37,7 +43,14 @@ fun NavGraph(navController: NavHostController) {
             exitTransition = { exitTransition() },
             popEnterTransition = { popEnterTransition() },
         ) {
-            HomeScreen(navController = navController)
+            HomeScreen(
+                onNavigateToDetailsScreen = { movieId ->
+                    navController.navigate(
+                        Screens.DetailsScreen.withMovie(movieId)
+                    )
+                },
+                onNavigateToFavoritesScreen = { navController.navigate(Screens.FavoritesScreen.route) }
+            )
         }
 
         composable(
@@ -45,7 +58,14 @@ fun NavGraph(navController: NavHostController) {
             exitTransition = { exitTransition() },
             popEnterTransition = { popEnterTransition() },
         ) {
-            FavoritesScreen(navController = navController)
+            FavoritesScreen(
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToDetailsScreen = { movieId ->
+                    navController.navigate(
+                        Screens.DetailsScreen.withMovie(movieId)
+                    )
+                }
+            )
         }
 
         composable(
@@ -55,7 +75,15 @@ fun NavGraph(navController: NavHostController) {
             arguments = listOf(navArgument(MOVIE_ID_ARG_KEY) { type = NavType.IntType }),
         ) { navBackStackEntry ->
             val movieID = navBackStackEntry.arguments?.getInt(MOVIE_ID_ARG_KEY) ?: 0
-            DetailsScreen(navController = navController, movieId = movieID)
+            DetailsScreen(
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToDetailsScreen = { movieId ->
+                    navController.navigate(
+                        Screens.DetailsScreen.withMovie(movieId)
+                    )
+                },
+                movieId = movieID
+            )
         }
     }
 }
