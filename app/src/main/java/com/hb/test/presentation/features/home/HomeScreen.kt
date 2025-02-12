@@ -53,6 +53,7 @@ import com.hb.test.utils.HOME_SCREEN
 import com.hb.test.utils.LoopReverseLottieLoader
 import com.hb.test.utils.mapError
 import com.hb.test.utils.showToast
+import com.hb.test.utils.trimTitle
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -280,9 +281,4 @@ private fun MovieItem(
             textAlign = TextAlign.Start
         )
     }
-}
-
-fun String.trimTitle(maxLength: Int = 15) = if (this.length <= maxLength) this else {
-    val textWithEllipsis = this.removeRange(startIndex = maxLength, endIndex = this.length)
-    "$textWithEllipsis..."
 }

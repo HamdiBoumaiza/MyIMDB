@@ -34,7 +34,7 @@ class NetworkModule {
     fun provideOkHttpClient(
         @LoggingInterceptor loggingInterceptor: Interceptor,
         @AuthorizationInterceptor authorizationInterceptor: Interceptor,
-        liveNetworkMonitor: NetworkMonitor
+        liveNetworkMonitor: NetworkMonitor,
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
@@ -64,21 +64,22 @@ class NetworkModule {
     @Singleton
     @LoggingInterceptor
     fun provideLoggingInterceptor(): Interceptor =
-        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        HttpLoggingInterceptor().setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE)
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit.Builder {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
     @Singleton
     @Provides
-    fun provideRemoteApi(retrofit: Retrofit.Builder): RemoteApi =
-        retrofit.build().create(RemoteApi::class.java)
+    fun provideRemoteApi(retrofit: Retrofit): RemoteApi =
+        retrofit.create(RemoteApi::class.java)
 
     companion object {
         const val BASE_URL = "https://api.themoviedb.org/3/"

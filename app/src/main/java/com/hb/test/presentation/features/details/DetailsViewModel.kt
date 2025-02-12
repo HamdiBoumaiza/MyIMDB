@@ -42,7 +42,7 @@ class DetailsViewModel @Inject constructor(
     private val _isFavoriteMovie: MutableStateFlow<Boolean> = MutableStateFlow(value = true)
     val isFavoriteMovie get() = _isFavoriteMovie.asStateFlow()
 
-    fun setMovieId(movieId: Int) {
+    private fun setMovieId(movieId: Int) {
         getMovieDetails(movieId)
         getMovieCast(movieId)
         getSimilarMovies(movieId)
@@ -81,12 +81,15 @@ class DetailsViewModel @Inject constructor(
 
     fun checkFavMovies(id: Int) {
         viewModelScope.launch {
-            getFavoriteMovieByIdUseCase(id).collect { _isFavoriteMovie.value = (it != null) }
+            getFavoriteMovieByIdUseCase(id).collect {
+                _isFavoriteMovie.value = (it != null)
+            }
         }
     }
 
     fun onEvent(uiEvent: DetailUiEvent) {
         when (uiEvent) {
+            is DetailUiEvent.SetMovieId -> setMovieId(uiEvent.movieId)
             is DetailUiEvent.AddToFavMovies -> addToFavMovies(uiEvent.movie)
             is DetailUiEvent.DeleteFavoriteMovie -> deleteFavoriteMovie(uiEvent.id)
         }

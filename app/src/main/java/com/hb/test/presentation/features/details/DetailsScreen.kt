@@ -50,7 +50,6 @@ import com.hb.test.R
 import com.hb.test.domain.model.Cast
 import com.hb.test.domain.model.Genre
 import com.hb.test.domain.model.Movie
-import com.hb.test.presentation.features.home.trimTitle
 import com.hb.test.presentation.theme.dp_10
 import com.hb.test.presentation.theme.dp_100
 import com.hb.test.presentation.theme.dp_12
@@ -70,15 +69,17 @@ import com.hb.test.utils.DarkAndLightPreviews
 import com.hb.test.utils.LoopReverseLottieLoader
 import com.hb.test.utils.mapError
 import com.hb.test.utils.showToast
+import com.hb.test.utils.trimTitle
 
 @Composable
 fun DetailsScreen(
     onNavigateBack: () -> Unit,
     onNavigateToDetailsScreen: (id: Int) -> Unit,
     movieId: Int,
-    detailsViewModel: DetailsViewModel = hiltViewModel()
+    onEvent: (DetailUiEvent) -> Unit,
+    detailsViewModel: DetailsViewModel = hiltViewModel(),
 ) {
-    detailsViewModel.setMovieId(movieId)
+    onEvent(DetailUiEvent.SetMovieId(movieId))
     val movieState by detailsViewModel.movieDetails.collectAsState()
     val castState by detailsViewModel.movieCast.collectAsStateWithLifecycle()
     val similarMovies = detailsViewModel.similarMovies.collectAsLazyPagingItems()
@@ -95,7 +96,7 @@ fun DetailsScreen(
                 .padding(dp_8),
             verticalArrangement = Arrangement.spacedBy(dp_12)
         ) {
-            MovieDetails(onNavigateBack, movieState, detailsViewModel)
+            MovieDetails(onNavigateBack, movieState, onEvent, detailsViewModel)
             MovieCast(castState)
             RecommendedMovie(similarMovies, onNavigateToDetailsScreen)
         }
@@ -118,9 +119,10 @@ private fun MovieCast(castState: DetailsScreenCastUIState) {
 fun MovieDetails(
     onNavigateBack: () -> Unit,
     state: DetailsScreenUIState,
+    onEvent: (DetailUiEvent) -> Unit,
     detailsViewModel: DetailsViewModel,
 ) {
-    val isMovieAlreadyFavorite = detailsViewModel.isFavoriteMovie.collectAsState().value
+    val isMovieAlreadyFavorite by detailsViewModel.isFavoriteMovie.collectAsState()
 
     when (state) {
         DetailsScreenUIState.Loading -> LoopReverseLottieLoader(lottieFile = R.raw.loader)
@@ -165,12 +167,12 @@ fun MovieDetails(
                         .width(dp_30)
                         .weight(0.1f)
                         .clickable {
-                            if (isMovieAlreadyFavorite) detailsViewModel.onEvent(
+                            if (isMovieAlreadyFavorite) onEvent(
                                 DetailUiEvent.DeleteFavoriteMovie(
                                     state.movie.id
                                 )
                             )
-                            else detailsViewModel.onEvent(DetailUiEvent.AddToFavMovies(state.movie))
+                            else onEvent(DetailUiEvent.AddToFavMovies(state.movie))
                             context.showToast(
                                 if (isMovieAlreadyFavorite) context.getString(R.string.fav_deleted)
                                 else context.getString(R.string.fav_added)
@@ -278,7 +280,10 @@ fun ErrorText(text: String) {
 }
 
 @Composable
-fun RecommendedMovie(pagingItems: LazyPagingItems<Movie>, onNavigateToDetailsScreen: (id: Int) -> Unit) {
+fun RecommendedMovie(
+    pagingItems: LazyPagingItems<Movie>,
+    onNavigateToDetailsScreen: (id: Int) -> Unit,
+) {
     Column(modifier = Modifier.padding(bottom = dp_10)) {
         when (pagingItems.loadState.refresh) {
             is LoadState.Loading -> {

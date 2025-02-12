@@ -16,16 +16,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hb.test.R
+import com.hb.test.domain.model.Movie
 import com.hb.test.presentation.features.MovieItem
 import com.hb.test.presentation.theme.dp_10
 import com.hb.test.presentation.theme.dp_12
@@ -34,15 +32,14 @@ import com.hb.test.presentation.theme.dp_4
 import com.hb.test.presentation.theme.dp_8
 import com.hb.test.presentation.theme.sp_14
 import com.hb.test.presentation.theme.sp_20
+import com.hb.test.utils.DarkAndLightPreviews
 
 @Composable
 fun FavoritesScreen(
+    favoriteMoviesState: List<Movie>,
     onNavigateBack: () -> Unit,
     onNavigateToDetailsScreen: (id: Int) -> Unit,
-    favoritesViewModel: FavoritesViewModel = hiltViewModel()
 ) {
-    val favoriteMoviesState by favoritesViewModel.favoriteMoviesState.collectAsStateWithLifecycle()
-
     Surface(
         color = MaterialTheme.colorScheme.background,
         modifier = Modifier
@@ -93,4 +90,16 @@ fun FavoritesScreen(
             }
         }
     }
+}
+
+@DarkAndLightPreviews
+@Composable
+private fun PreviewFavoritesList() {
+    FavoritesScreen(listOf(Movie(title = "TEST PREVIEW"), Movie(title = "TEST PREVIEW 2")), {}, {})
+}
+
+@DarkAndLightPreviews
+@Composable
+private fun PreviewEmptyFavorites() {
+    FavoritesScreen(emptyList(), {}, {})
 }

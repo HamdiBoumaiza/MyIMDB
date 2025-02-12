@@ -38,6 +38,7 @@ class MovieDetailsTest {
             MovieDetails(
                 onNavigateBack = {},
                 DetailsScreenUIState.Success(Movie().copy(title = TITLE_TEST)),
+                onEvent = {},
                 composeTestRule.activity.viewModels<DetailsViewModel>().value
             )
         }

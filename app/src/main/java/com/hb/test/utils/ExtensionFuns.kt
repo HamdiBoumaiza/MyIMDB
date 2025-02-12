@@ -11,3 +11,8 @@ fun Context.showToast(message: String) {
             Toast.LENGTH_LONG,
         ).show()
 }
+
+fun String.trimTitle(maxLength: Int = 15) = if (this.length <= maxLength) this else {
+    val textWithEllipsis = this.removeRange(startIndex = maxLength, endIndex = this.length)
+    "$textWithEllipsis..."
+}
