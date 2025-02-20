@@ -192,8 +192,8 @@ fun MovieDetails(
                     .clip(RoundedCornerShape(dp_12))
                     .fillMaxWidth()
                     .height(dp_300),
-                contentScale = ContentScale.Fit,
-                placeholder = painterResource(android.R.drawable.ic_media_play),
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(R.drawable.ic_placeholder),
                 contentDescription = ""
             )
             Row(
